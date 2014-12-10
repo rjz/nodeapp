@@ -1,0 +1,13 @@
+#!upstart
+# /etc/{{ nodeapp_name }}.conf
+description "nodejs {{ nodeapp_name }}"
+
+start on runlevel [2345]
+stop on shutdown
+
+pre-start script
+  for n in `seq 1 3`; do
+    start {{ nodeapp_name }}-worker NUM="$n"
+  done
+end script
+

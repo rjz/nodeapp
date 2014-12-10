@@ -1,0 +1,19 @@
+#!upstart
+# /etc/{{ nodeapp_name }}-worker.conf
+
+stop on stopping {{ nodeapp_name }}
+
+respawn
+respawn limit 5 30
+
+instance worker-$NUM
+
+script
+
+  exec sudo -u www-data \
+    PORT="`printf '32%02i' $NUM`" \
+    NODE_ENV=production \
+    /usr/bin/nodejs {{ nodeapp_index }}
+
+end script
+

@@ -1,0 +1,20 @@
+---
+
+- name: Install cURL (for n)
+  apt: name=curl
+
+- name: Install n globally
+  npm: name=n global=yes
+
+- name: Use node @ version
+  command: n {{ nodeapp_node_version }}
+
+- name: 'Push upstart worker config'
+  template: src=webapp-worker.conf.j2 dest=/etc/init/{{ nodeapp_name }}-worker.conf
+
+- name: 'Push upstart worker config'
+  template: src=webapp.conf.j2 dest=/etc/init/{{ nodeapp_name }}.conf
+
+- name: 'Restart app'
+  service: name={{ nodeapp_name }} state=restarted
+
