@@ -11,7 +11,7 @@ instance $NODEAPP_INDEX
 script
 
   exec sudo -u www-data \
-{% for k, v in item.nodeapp_env %}
+{% for k, v in nodeapp_env.iteritems() %}
     {{ k }}={{ v }} \
 {% endfor %}
     n use {{ nodeapp_node_version }} {{ nodeapp_index }}

@@ -11,8 +11,6 @@
 
 - name: 'Push upstart worker config'
   template: src=webapp-worker.conf.j2 dest=/etc/init/{{ nodeapp_name }}-worker.conf
-  with_items:
-    - nodeapp_env
 
 - name: 'Push upstart worker config'
   template: src=webapp.conf.j2 dest=/etc/init/{{ nodeapp_name }}.conf
