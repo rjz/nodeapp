@@ -1,16 +1,20 @@
 #!upstart
 # /etc/{{ nodeapp_name }}-worker.conf
 
+description "worker instance of '{{ nodeapp_name }}'"
+
 stop on stopping {{ nodeapp_name }}
 
+{% if nodeapp_respawn_limit %}
 respawn
-respawn limit 5 30
+respawn limit {{ nodeapp_respawn_limit }}
+{% endif %}
 
 instance $NODEAPP_INDEX
 
 script
 
-  exec sudo -u www-data \
+  exec sudo -u {{ nodeapp_user }} \
 {% for k, v in nodeapp_env.iteritems() %}
     {{ k }}={{ v }} \
 {% endfor %}

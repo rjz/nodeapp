@@ -1,6 +1,7 @@
 #!upstart
 # /etc/{{ nodeapp_name }}.conf
-description "nodejs {{ nodeapp_name }}"
+
+description "master job for {{ nodeapp_name }}"
 
 start on runlevel [2345]
 stop on shutdown

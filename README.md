@@ -18,15 +18,20 @@ You must specify a `nodeapp_index` that points to the application script to run:
 All other variables are optional, defaulting to:
 
     nodeapp_name: webapp
+    nodeapp_user: www-data
     nodeapp_node_version: 0.10.33
     nodeapp_num_workers: 3
+    nodeapp_respawn_limit: 5 30
 
 These variables define an upstart service named "webapp" that, when started or
 stopped:
 
     $ start webapp
 
-...will launched three instances of the app. You may also optionally specify a
+...will launched three instances of the app that will be respawned up to five
+times in 30 seconds if they fail.
+
+You may also optionally specify a
 `nodeapp_env` variable whose contents will be set within each application
 process's environment.
 
@@ -34,8 +39,8 @@ process's environment.
       - NODE_ENV: production
         PORT: "`printf '32%02i' $NODEAPP_INDEX`"
 
-The variable `$NODEAPP_INDEX` is set inside each upstart instance with a unique
-ID of the worker application.
+The variable `$NODEAPP_INDEX` is set inside each upstart instance to the
+numeric ID of the worker application.
 
 Dependencies
 ------------

@@ -2,8 +2,10 @@
 nodeapp_node_version: 0.10.33
 nodeapp_name: webapp
 
+nodeapp_user: www-data
 nodeapp_num_workers: 3
-nodeapp_port_string: 32%02i
+nodeapp_respawn_limit: 5 30
+
 nodeapp_env:
   NODE_ENV: production
 
