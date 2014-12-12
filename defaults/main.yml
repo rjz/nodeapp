@@ -4,4 +4,6 @@ nodeapp_name: webapp
 
 nodeapp_num_workers: 3
 nodeapp_port_string: 32%02i
+nodeapp_env:
+  - NODE_ENV: production
 

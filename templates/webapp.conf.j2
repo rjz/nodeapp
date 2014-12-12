@@ -7,7 +7,7 @@ stop on shutdown
 
 pre-start script
   for n in `seq 1 {{ nodeapp_num_workers }}`; do
-    start {{ nodeapp_name }}-worker NUM="$n"
+    start {{ nodeapp_name }}-worker NODEAPP_INDEX="$n"
   done
 end script
 
